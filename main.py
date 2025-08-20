@@ -278,6 +278,8 @@ def format_activity_list(activities):
 def run_server(port=5678):
     """Run server mode"""
     global manager
+    # Initialize manager for server mode
+    manager = ActivityManager()
     with socketserver.TCPServer(("", port), ActivityHTTPRequestHandler) as httpd:
         print("Server running on port {}".format(port))
         httpd.serve_forever()
