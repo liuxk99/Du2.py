@@ -76,6 +76,29 @@ Pull activities from remote server:
 python main.py --pull http://remote-server:5678
 ```
 
+### Testing Distributed Features
+
+1. Start the server:
+```bash
+python main.py --server --port 5678
+```
+
+2. In another terminal, create and push activities:
+```bash
+python main.py --start "Test activity" --comments "This is a test"
+python main.py --push http://localhost:5678
+```
+
+3. Retrieve activities from server:
+```bash
+curl http://localhost:5678/activities
+```
+
+4. Pull activities from server:
+```bash
+python main.py --pull http://localhost:5678
+```
+
 ## Interactive Mode
 
 To use the tool in interactive mode with F key support, run it directly in a terminal:
