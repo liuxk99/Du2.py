@@ -7,6 +7,8 @@
 + 接受远程推送Activity数据到服务器，并合并；
 + 结束远程主机从拉取Activity数据，在本地合并；
 # 具体要求
+## 编程语言
+ + 使用Python3.13
 ## 命令行界面，交互
  + CTRL+C，终止(Abort)
  + F键，结束
@@ -14,11 +16,8 @@
  + 开始一个活动，此时记录开始时间，状态为进行中
  + 结束一个活动，此时记录结束时间，状态为正常
  + 终止一个活动，此时记录结束时间，状态为终止
- + 列出活动，默认不包含removed or aborted activities，除非使用`--all` option。格式为
+ + 列出活动，默认不包含removed or aborted activities，除非使用`--all` option。格式如下：如果超过一个活动，用`---`间隔，每行一个活动，每行格式如下：
 ```
-uuid 日期 begin-time end-time description comments
-attachattachments files
----
 uuid 日期 begin-time end-time description comments
 attachattachments files
 ```

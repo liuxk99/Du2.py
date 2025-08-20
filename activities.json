@@ -1,0 +1,20 @@
+[
+  {
+    "uuid": "1fa5a21f-6939-4fc2-9ac6-1004e30a3a75",
+    "start_time": "2025-08-20T18:39:43.138259",
+    "end_time": "2025-08-20T18:39:50.212248",
+    "description": "Activity description",
+    "comments": "",
+    "attachments": [],
+    "status": "finished"
+  },
+  {
+    "uuid": "0564a47b-8c73-4da9-a89b-6a00232c48d1",
+    "start_time": "2025-08-20T18:39:58.356909",
+    "end_time": "2025-08-20T18:39:59.945863",
+    "description": "Hello",
+    "comments": "",
+    "attachments": [],
+    "status": "finished"
+  }
+]
