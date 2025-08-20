@@ -227,6 +227,8 @@ class ActivityHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         if self.path == "/activities":
             # Return all activity data
             global manager
+            # Reload activities data to ensure it's up to date
+            manager.load_activities()
             activities_data = [activity.to_dict() for activity in manager.activities]
             
             self.send_response(200)
