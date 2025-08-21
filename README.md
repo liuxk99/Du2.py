@@ -102,7 +102,7 @@ python main.py --pull http://localhost:5678
 ```
 
 5. Screenshots
-<img src="https://raw.githubusercontent.com/liuxk99/Du2.py/refs/heads/master/screenshots/cli-serv-01.png" width="400">
+<img src="https://raw.githubusercontent.com/liuxk99/Du2.py/refs/heads/master/screenshots/cli-serv-02.png" width="400">
 
 ## Interactive Mode
 
