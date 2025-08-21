@@ -99,6 +99,9 @@ curl http://localhost:5678/activities
 python main.py --pull http://localhost:5678
 ```
 
+5. Screenshots
+<img src="https://github.com/liuxk99/Du2.py/blob/master/screenshots/start.png" width="400">
+
 ## Interactive Mode
 
 To use the tool in interactive mode with F key support, run it directly in a terminal:
