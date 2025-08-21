@@ -2,6 +2,8 @@
 
 A command-line tool for recording and managing activities with distributed capabilities.
 
+[中文版 README](README_ZH.md)
+
 ## Features
 
 - Start, finish, and abort activities
