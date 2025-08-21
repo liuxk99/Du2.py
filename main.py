@@ -17,7 +17,6 @@ import socketserver
 import threading
 import urllib.request
 import urllib.parse
-import keyboard
 import time
 
 
