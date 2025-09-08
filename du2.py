@@ -26,6 +26,7 @@ class Activity:
     def __init__(self, description, comments="", attachments=None):
         self.uuid = str(uuid.uuid4())
         self.start_time = datetime.now().isoformat()
+        self.last_modify_time = self.start_time  # Set to start_time initially
         self.end_time = None
         self.description = description
         self.comments = comments
@@ -35,22 +36,36 @@ class Activity:
     def finish(self):
         """Finish activity normally"""
         self.end_time = datetime.now().isoformat()
+        self.last_modify_time = datetime.now().isoformat()
         self.status = "finished"
     
     def abort(self):
         """Abort activity"""
         self.end_time = datetime.now().isoformat()
+        self.last_modify_time = datetime.now().isoformat()
         self.status = "aborted"
     
     def delete(self):
         """Mark activity as deleted"""
+        self.last_modify_time = datetime.now().isoformat()
         self.status = "deleted"
+    
+    def modify(self, description=None, comments=None, attachments=None):
+        """Modify activity properties"""
+        self.last_modify_time = datetime.now().isoformat()
+        if description is not None:
+            self.description = description
+        if comments is not None:
+            self.comments = comments
+        if attachments is not None:
+            self.attachments = attachments
     
     def to_dict(self):
         """Convert to dictionary"""
         return {
             "uuid": self.uuid,
             "start_time": self.start_time,
+            "last_modify_time": self.last_modify_time,
             "end_time": self.end_time,
             "description": self.description,
             "comments": self.comments,
@@ -64,6 +79,8 @@ class Activity:
         activity = cls.__new__(cls)
         activity.uuid = data["uuid"]
         activity.start_time = data["start_time"]
+        # Handle the case where last_modify_time might not exist in older data
+        activity.last_modify_time = data.get("last_modify_time", activity.start_time)
         activity.end_time = data["end_time"]
         activity.description = data["description"]
         activity.comments = data["comments"]
@@ -150,6 +167,17 @@ class ActivityManager:
                 activity.delete()
                 self.save_activities()
                 return True
+        return False
+    
+    def modify_activity(self, activity_uuid, description=None, comments=None, attachments=None):
+        """Modify activity by uuid"""
+        for activity in self.activities:
+            if activity.uuid == activity_uuid:
+                # Only allow modification of ongoing or finished activities
+                if activity.status not in ["deleted", "aborted"]:
+                    activity.modify(description, comments, attachments)
+                    self.save_activities()
+                    return True
         return False
     
     def push_to_server(self, server_url):
@@ -252,15 +280,17 @@ def format_activity_list(activities):
         # Extract time parts
         start_time = activity.start_time.split("T")[1].split(".")[0] if activity.start_time else ""
         end_time = activity.end_time.split("T")[1].split(".")[0] if activity.end_time else ""
+        last_modify_time = activity.last_modify_time.split("T")[1].split(".")[0] if activity.last_modify_time else ""
         
         # Format activity info
-        activity_str = "{} {} {} {} {} {}".format(
+        activity_str = "{} {} {} {} {} {} [Modified: {}]".format(
             activity.uuid, 
             start_date, 
             start_time, 
             end_time, 
             activity.description, 
-            activity.comments
+            activity.comments,
+            last_modify_time
         )
         result.append(activity_str)
         
@@ -326,6 +356,7 @@ def main():
     parser.add_argument("--list", action="store_true", help="List activities")
     parser.add_argument("--all", action="store_true", help="Show all activities including deleted/aborted")
     parser.add_argument("--delete", metavar="UUID", help="Delete activity by UUID")
+    parser.add_argument("--modify", metavar="UUID", help="Modify activity by UUID")
     parser.add_argument("--push", metavar="SERVER_URL", help="Push activities to remote server")
     parser.add_argument("--pull", metavar="SERVER_URL", help="Pull activities from remote server")
     parser.add_argument("--comments", metavar="COMMENTS", help="Comments for the activity")
@@ -346,6 +377,13 @@ def main():
         return
     
     # Handle command line arguments
+    if args.modify:
+        if manager.modify_activity(args.modify, args.start, args.comments, args.attachments):
+            print("Activity {} modified successfully.".format(args.modify))
+        else:
+            print("Activity {} not found or cannot be modified.".format(args.modify))
+        return
+    
     if args.start:
         activity = manager.start_activity(args.start, args.comments or "", args.attachments or [])
         print("Activity started: {}".format(activity.uuid))

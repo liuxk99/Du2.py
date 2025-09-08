@@ -59,6 +59,11 @@ python du2.py --list [--all]
 python du2.py --delete <activity-uuid>
 ```
 
+修改活动：
+```bash
+python du2.py --modify <activity-uuid> --start "新描述" --comments "新评论"
+```
+
 ### 分布式功能
 
 以服务器模式运行：

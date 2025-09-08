@@ -61,6 +61,11 @@ Delete an activity (soft delete):
 python du2.py --delete <activity-uuid>
 ```
 
+Modify an activity:
+```bash
+python du2.py --modify <activity-uuid> --start "New description" --comments "New comments"
+```
+
 ### Distributed Features
 
 Run in server mode:
