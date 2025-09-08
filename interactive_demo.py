@@ -16,7 +16,7 @@ def main():
     description = " ".join(sys.argv[1:])
     
     # Start an activity with wait mode
-    cmd = [sys.executable, "main.py", "--start", description, "--wait"]
+    cmd = [sys.executable, "du2.py", "--start", description, "--wait"]
     
     print(f"Starting activity: {description}")
     print("The program will block until you press Enter to finish or CTRL+C to abort.")

@@ -29,64 +29,64 @@ pip install -r requirements.txt
 
 开始一个新活动：
 ```bash
-python main.py --start "活动描述" --comments "可选评论" --attachments file1.txt file2.pdf
+python du2.py --start "活动描述" --comments "可选评论" --attachments file1.txt file2.pdf
 ```
 
 开始一个新活动并等待用户输入以结束：
 ```bash
-python main.py --start "活动描述" --wait
+python du2.py --start "活动描述" --wait
 ```
 然后按 Enter 键结束活动或按 CTRL+C 中止活动。
 （注意：F 键支持需要在 macOS 上具有特殊权限）
 
 结束当前活动：
 ```bash
-python main.py --finish
+python du2.py --finish
 ```
 
 中止当前活动：
 ```bash
-python main.py --abort
+python du2.py --abort
 ```
 
 列出活动：
 ```bash
-python main.py --list [--all]
+python du2.py --list [--all]
 ```
 
 删除活动（软删除）：
 ```bash
-python main.py --delete <activity-uuid>
+python du2.py --delete <activity-uuid>
 ```
 
 ### 分布式功能
 
 以服务器模式运行：
 ```bash
-python main.py --server [--port 5678]
+python du2.py --server [--port 5678]
 ```
 
 将本地活动推送到远程服务器：
 ```bash
-python main.py --push http://remote-server:5678
+python du2.py --push http://remote-server:5678
 ```
 
 从远程服务器拉取活动：
 ```bash
-python main.py --pull http://remote-server:5678
+python du2.py --pull http://remote-server:5678
 ```
 
 ### 测试分布式功能
 
 1. 启动服务器：
 ```bash
-python main.py --server --port 5678
+python du2.py --server --port 5678
 ```
 
 2. 在另一个终端中，创建并推送活动：
 ```bash
-python main.py --start "测试活动" --comments "这是一个测试"
-python main.py --push http://localhost:5678
+python du2.py --start "测试活动" --comments "这是一个测试"
+python du2.py --push http://localhost:5678
 ```
 
 3. 从服务器检索活动：
@@ -96,17 +96,17 @@ curl http://localhost:5678/activities
 
 4. 从服务器拉取活动：
 ```bash
-python main.py --pull http://localhost:5678
+python du2.py --pull http://localhost:5678
 ```
 
 5. 截图
-<img src="https://raw.githubusercontent.com/liuxk99/Du2.py/refs/heads/master/screenshots/cli-serv-01.png" width="400">
+<img src="https://raw.githubusercontent.com/liuxk99/Du2.py/refs/heads/master/screenshots/cli-serv-02.png" width="400">
 
 ## 交互模式
 
 要在具有 F 键支持的交互模式下使用该工具，请直接在终端中运行：
 ```bash
-python main.py --start "活动描述" --wait
+python du2.py --start "活动描述" --wait
 ```
 
 ## 活动状态

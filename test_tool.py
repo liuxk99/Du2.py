@@ -27,25 +27,25 @@ def main():
     print("Distributed Time Management Tool - Test Script")
     
     # Test creating activities
-    run_command("python main.py --start 'Test Activity 1' --comments 'First test activity'", "Create first activity")
-    run_command("python main.py --start 'Test Activity 2' --comments 'Second test activity' --attachments doc1.pdf doc2.txt", "Create second activity with attachments")
+    run_command("python du2.py --start 'Test Activity 1' --comments 'First test activity'", "Create first activity")
+    run_command("python du2.py --start 'Test Activity 2' --comments 'Second test activity' --attachments doc1.pdf doc2.txt", "Create second activity with attachments")
     
     # Test listing activities
-    run_command("python main.py --list", "List activities")
+    run_command("python du2.py --list", "List activities")
     
     # Test finishing activities
-    run_command("python main.py --finish", "Finish current activity")
-    run_command("python main.py --list", "List activities after finishing")
+    run_command("python du2.py --finish", "Finish current activity")
+    run_command("python du2.py --list", "List activities after finishing")
     
     # Test aborting activities
-    run_command("python main.py --start 'Test Activity 3' --comments 'Third test activity'", "Create third activity")
-    run_command("python main.py --abort", "Abort current activity")
-    run_command("python main.py --list", "List activities after aborting")
-    run_command("python main.py --list --all", "List all activities including aborted")
+    run_command("python du2.py --start 'Test Activity 3' --comments 'Third test activity'", "Create third activity")
+    run_command("python du2.py --abort", "Abort current activity")
+    run_command("python du2.py --list", "List activities after aborting")
+    run_command("python du2.py --list --all", "List all activities including aborted")
     
     # Test deleting activities
-    run_command("python main.py --delete $(python main.py --list --all | head -n 1 | cut -d' ' -f1)", "Delete first activity")
-    run_command("python main.py --list --all", "List all activities after deletion")
+    run_command("python du2.py --delete $(python du2.py --list --all | head -n 1 | cut -d' ' -f1)", "Delete first activity")
+    run_command("python du2.py --list --all", "List all activities after deletion")
     
     print("\n--- Test completed ---")
 
